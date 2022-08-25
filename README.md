@@ -28,6 +28,7 @@ db:
     image: mysql:5.7
     environment:
       - MYSQL_ROOT_PASSWORD=p@ssword
+      - MYSQL_ROOT_HOST=%
       - MYSQL_DATABASE=sample_dev # <- here
       - MYSQL_USER=sample # <- here
       - MYSQL_PASSWORD=p@ssword
@@ -41,6 +42,8 @@ config :live_view_todos, LiveViewTodos.Repo,
   password: "p@ssword", # <- here
   hostname: "db", # <- here
   database: "live_view_todos_dev",
+...
+  http: [ip: {0, 0, 0, 0}, port: 4000], # <- here
 ```
 
 When run `docker compose up` before modify settings, maybe causes error. So you run `docker volume ls` then `docker volume rm xxx-mysqldb-local_data`
